@@ -37,7 +37,7 @@ def get_lyrics(name):
         lyrics = PyLyrics.getLyrics(artist, title)
         lyric_cache[name] = _process_lyrics(lyrics.splitlines())
         return lyrics
-    except ...: return None
+    except: return None
 
 
 class GameException(Exception):
@@ -56,13 +56,12 @@ class GameSession:
         self.randomize_line()
 
     def randomize_song(self):
-        if len(self.song_names) == 0:
-            self.current_song = None
-            return
+        if len(self.song_names) == 0: raise GameException(lang.msg('source_empty'))
         self.current_song = random.choice(self.song_names)
-        if len(self.lyrics) == 0:
-            self.song_names.pop(self.current_song)
+        if self.lyrics is None or len(self.lyrics) == 0:
+            self.song_names.remove(self.current_song)
             self.randomize_song()
+        print(self.current_song)
 
     def randomize_line(self):
         if random.randint(0, 100) > 100 * SONG_CHANGE_PROB: self.randomize_song()

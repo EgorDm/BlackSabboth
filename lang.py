@@ -3,6 +3,7 @@ messages = {
     '404': 'Resource could not be found!',
     '404_tracks': 'Could not find tracks for: {}!',
     'no_source': 'Please specity a source type. Available [artist, album, track]',
+    'source_empty': 'Source unfortunately has no lyrics available.',
 
 
     # Views
