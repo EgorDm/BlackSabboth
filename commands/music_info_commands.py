@@ -32,7 +32,6 @@ class SpotifyCommand(commands.BaseCommand):
 
 class ArtistCommand(SpotifyCommand):
     def action(self):
-        print('start')
         self.render_resource(self.spotify.find_artist(' '.join(self.args), self._get_id()), ArtistPresenter,
                              lang.msg('404_called', 'artist', ' '.join(self.args)))
 

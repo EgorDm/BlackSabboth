@@ -66,8 +66,6 @@ class StatsGameCommand(LyricGameCommand):
     def do_logic(self):
         if self.session is None: return self.msg(lang.msg('game_not_exists'))
 
-        for user_id, score in self.session.scores.items():
-            print(self.handler.bot.getChatMember(self.message.chat_id, user_id))
         ret = [lang.msg('game_stat', self.handler.bot.getChatMember(self.message.chat_id, user_id)['user']['first_name'], score)
                for user_id, score in self.session.scores.items()]
         self.msg('*Stats*\n' + '\n'.join(ret))

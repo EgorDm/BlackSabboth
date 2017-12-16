@@ -27,7 +27,6 @@ class BaseCommand:
         """
         self.handler = handler
         self.message = message
-        print(self.message)
 
     def execute(self):
         pass

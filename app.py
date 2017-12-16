@@ -1,18 +1,16 @@
 import os
 import time
 from os.path import join, dirname
+
 from dotenv import load_dotenv
 from telepot.loop import MessageLoop
+
 from bot import BlackSabboth
-
-
-def on_callback_query(args):
-    print(args)
 
 
 def main():
     bot = BlackSabboth(os.environ.get("TELEGRAM_KEY"))
-    bot.setWebhook()
+    # bot.setWebhook()
     MessageLoop(bot).run_as_thread()
     print('Listening ...')
 
