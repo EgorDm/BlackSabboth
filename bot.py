@@ -17,7 +17,7 @@ class TheManager(telepot.helper.ChatHandler):
         message = Message(msg)
 
         if message.command is not None and message.command in commands.routes: return commands.routes[message.command](self, message).execute()
-        self.on_unknown_intent()
+        if message.gate == '/': self.on_unknown_intent()
 
     def on_unknown_intent(self):
         self.sender.sendMessage('What are you talking about!?')

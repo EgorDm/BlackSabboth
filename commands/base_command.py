@@ -15,7 +15,7 @@ class Message:
 
     def has_context(self): return self.context is not None
 
-    def __str__(self) -> str: return f"command: {self.command}\narguments: {self.args}"
+    def __str__(self) -> str: return "command: {}\narguments: {}".format(self.command, self.args)
 
 
 class BaseCommand:

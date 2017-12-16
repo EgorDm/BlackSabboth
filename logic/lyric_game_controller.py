@@ -148,5 +148,5 @@ class LyricGameController:
             songs = [song]
 
         if songs is None: return []
-        for song in songs: song_names.append(f'{song["artists"][0]["name"]} - {song["name"]}')
+        for song in songs: song_names.append('{} - {}'.format(song["artists"][0]["name"], song["name"]))
         return song_names
