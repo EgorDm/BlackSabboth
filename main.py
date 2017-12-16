@@ -1,12 +1,8 @@
 import os
 import time
 from os.path import join, dirname
-
-import telepot
 from dotenv import load_dotenv
-from telepot.delegate import include_callback_query_chat_id, pave_event_space, per_chat_id, create_open
 from telepot.loop import MessageLoop
-
 from bot import BlackSabboth
 
 
@@ -15,12 +11,7 @@ def on_callback_query(args):
 
 
 def main():
-    bot = telepot.DelegatorBot(os.environ.get("TELEGRAM_KEY"), [
-        include_callback_query_chat_id(
-            pave_event_space())(
-            per_chat_id(), create_open, BlackSabboth, timeout=10),
-    ])
-
+    bot = BlackSabboth(os.environ.get("TELEGRAM_KEY"))
     MessageLoop(bot).run_as_thread()
     print('Listening ...')
 

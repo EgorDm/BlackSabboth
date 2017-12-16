@@ -34,3 +34,10 @@ def build_cmd(command, vars=None, args=None):
     if vars is None: vars = []
     vars = [pack_var(key, value) for key, value in vars.items()]
     return '/{} {} {}'.format(command, ' '.join(vars), ' '.join(args))
+
+
+def filter_non_vars(tokens):
+    ret = []
+    for arg in tokens:
+        if re.match('(\$)*(\$)\w+', arg) is None: ret.append(arg)
+    return ret
