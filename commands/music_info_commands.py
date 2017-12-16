@@ -2,13 +2,12 @@ import commands
 import lang
 import utils
 from commands.presenters import ArtistPresenter, AlbumPresenter, AlbumsPresenter, TrackPresenter, ITEMS_PER_PAGE, TracksPresenter
-from logic import SpotifyController
 
 
 class SpotifyCommand(commands.BaseCommand):
-    def __init__(self, handler, command, args, last_id=None):
-        super().__init__(handler, command, args, last_id)
-        self.spotify = SpotifyController()
+    def __init__(self, handler, message):
+        super().__init__(handler, message)
+        self.spotify = handler.bot.spotify_controller
 
     def execute(self):
         parent = self.get_var('p')
@@ -18,8 +17,7 @@ class SpotifyCommand(commands.BaseCommand):
     def action(self):
         pass
 
-    def parent_action(self, id):
-        pass
+    def parent_action(self, id): pass
 
     def render_resource(self, resource, presenter, error_msg):
         if resource is None: return self.msg(error_msg)
@@ -27,8 +25,7 @@ class SpotifyCommand(commands.BaseCommand):
 
     def _get_id(self): return self.get_var()
 
-    def _keyboard_buttons(self, data):
-        return [{"text": lang.msg('open_spotify'), "url": data['external_urls']['spotify']}]
+    def _keyboard_buttons(self, data): return [{"text": lang.msg('open_spotify'), "url": data['external_urls']['spotify']}]
 
     def _is_edit(self): return int(self.get_var('rep', 0)) == 1
 
