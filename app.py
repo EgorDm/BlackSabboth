@@ -12,6 +12,7 @@ def on_callback_query(args):
 
 def main():
     bot = BlackSabboth(os.environ.get("TELEGRAM_KEY"))
+    bot.setWebhook()
     MessageLoop(bot).run_as_thread()
     print('Listening ...')
 
