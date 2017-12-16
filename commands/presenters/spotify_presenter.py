@@ -71,6 +71,7 @@ class TrackPresenter(SpotifyPresenter):
         message = lang.msg('track', resource['name'], artists, resource['duration_ms'] / 60000)
 
         command.msg(message, reply_markup=command.build_keyboard(resource))
+        if 'preview_url' in resource: bot.sendAudio(resource['preview_url'], caption='Preview', duration=30, title=resource['name'], performer=artists)
 
 
 class TracksPresenter(CollectionPresenter):
