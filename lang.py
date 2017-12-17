@@ -5,7 +5,6 @@ messages = {
     'no_source': 'Please specity a source type. Available [artist, album, track]',
     'source_empty': 'Source unfortunately has no lyrics available.',
 
-
     # Views
     'artist': '*{}*\n*Followers:* {}\n*Genres:* {}',
     'album': '*{}* ({})\nBy _{}_\n*Genres:* {}\n*Tracks:* {}',
@@ -26,6 +25,7 @@ messages = {
     'previous_page': 'Previous page',
     'list_items': '*Page {} of {}*\nFollowing items are found:',
     'open_spotify': 'Open in Spotify',
+    'start_game_with': 'Lyrics quiz',
 }
 
 

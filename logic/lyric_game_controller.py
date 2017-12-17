@@ -61,7 +61,6 @@ class GameSession:
         if self.lyrics is None or len(self.lyrics) == 0:
             self.song_names.remove(self.current_song)
             self.randomize_song()
-        print(self.current_song)
 
     def randomize_line(self):
         if random.randint(0, 100) > 100 * SONG_CHANGE_PROB: self.randomize_song()

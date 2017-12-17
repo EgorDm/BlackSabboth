@@ -36,7 +36,10 @@ class ArtistCommand(SpotifyCommand):
                              lang.msg('404_called', 'artist', ' '.join(self.args)))
 
     def _keyboard_buttons(self, data):
-        return [{"text": lang.msg('view_albums'), "callback_data": utils.build_cmd('album', {'p': data['id']})}] + super()._keyboard_buttons(data)
+        return [
+                   {"text": lang.msg('view_albums'), "callback_data": utils.build_cmd('album', {'p': data['id']})},
+                   {"text": lang.msg('start_game_with'), "callback_data": utils.build_cmd('game', {'i': data['id']}, ['artist'])}
+               ] + super()._keyboard_buttons(data)
 
 
 class AlbumCommand(SpotifyCommand):
@@ -47,7 +50,10 @@ class AlbumCommand(SpotifyCommand):
         self.render_resource(self.spotify.artist_albums(id, limit=ITEMS_PER_PAGE, offset=self.get_var('offset', 0)), AlbumsPresenter, lang.msg('404'))
 
     def _keyboard_buttons(self, data):
-        return [{"text": lang.msg('view_tracks'), "callback_data": utils.build_cmd('track', {'p': data['id']})}] + super()._keyboard_buttons(data)
+        return [
+                   {"text": lang.msg('view_tracks'), "callback_data": utils.build_cmd('track', {'p': data['id']})},
+                   {"text": lang.msg('start_game_with'), "callback_data": utils.build_cmd('game', {'i': data['id']}, ['album'])}
+               ] + super()._keyboard_buttons(data)
 
 
 class TrackCommand(SpotifyCommand):
@@ -56,3 +62,8 @@ class TrackCommand(SpotifyCommand):
 
     def parent_action(self, id):
         self.render_resource(self.spotify.album_tracks(id, limit=ITEMS_PER_PAGE, offset=self.get_var('offset', 0)), TracksPresenter, lang.msg('404'))
+
+    def _keyboard_buttons(self, data):
+        return [
+                   {"text": lang.msg('start_game_with'), "callback_data": utils.build_cmd('game', {'i': data['id']}, ['track'])}
+                ] + super()._keyboard_buttons(data)
