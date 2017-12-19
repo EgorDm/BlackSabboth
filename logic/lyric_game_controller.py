@@ -5,7 +5,7 @@ import time
 from PyLyrics import PyLyrics
 
 import lang
-#import logic
+from logic.cleaning import sanitize_title
 
 SONG_CHANGE_PROB = 0.1
 N_PREVIOUS_LINES = 3
@@ -20,7 +20,7 @@ def _process_lyrics(lyrics):
     dup_count = 0
     for i in range(len(lyrics)):
         line = lyrics[i]
-        if i + 1 < len(lyrics) and line.lower() == lyrics[i+1]:
+        if i + 1 < len(lyrics) and line.lower() == lyrics[i + 1]:
             dup_count += 1
             continue
         if dup_count > 0: line += ' _[x{}]_'.format(dup_count)
@@ -96,7 +96,7 @@ class GameSession:
         # score = accuracy * len(current_line.split())
         score = 5 if guess == current_line else 0
         self.add_score(player_id, score)
-        return score # accuracy,
+        return score  # accuracy,
 
     @property
     def lyrics(self): return get_lyrics(self.current_song)
@@ -146,5 +146,5 @@ class LyricGameController:
             songs = [song]
 
         if songs is None: return []
-        for song in songs: song_names.append('{} - {}'.format(song["artists"][0]["name"], song["name"]))
+        for song in songs: song_names.append('{} - {}'.format(song["artists"][0]["name"], sanitize_title(song["name"])))
         return song_names
